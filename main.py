@@ -3,6 +3,7 @@
 #           27/11/2016              #
 
 from tkinter import *
+from random import randrange
 
 def drawCube():
     global cube
@@ -87,6 +88,15 @@ def executeCommand(command):
     #play sequence
     for i in range(len(commands)):
         makeMove(commands[i])
+
+def shuffle():
+    commands = ["U", "U'", "L", "L'", "R", "R'", "D", "D'", "B", "B'", "F", "F'"]
+    moves = 20
+    chain = ""
+    for i in range(moves):
+        chain = chain + commands[randrange(12)]
+    print("suffle command: " + chain)
+    executeCommand(chain)
         
 def solve():
     global cube
@@ -153,6 +163,8 @@ commandButton = Button(root, text="Execute command", command=lambda: executeComm
 commandButton.grid(row=1, column=1)
 resetButton = Button(root, text="Solve cube", command=solve)
 resetButton.grid(row=1, column=2)
+resetButton = Button(root, text="Shuffle cube", command=shuffle)
+resetButton.grid(row=2, column=1)
 
 print("F2 R' B' U R' L F' L F' B D' R B L2")
 root.mainloop()
